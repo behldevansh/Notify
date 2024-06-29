@@ -3,9 +3,13 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import React from 'react'
+import { useConvexAuth } from 'convex/react';
+import { SignInButton } from '@clerk/clerk-react';
 import Link from 'next/link';
+import { Spinner } from '@/components/spinner';
 
 const Heading = () => {
+  const { isAuthenticated, isLoading } = useConvexAuth();
 
   return (
     <div className='max-w-3xl space-y-4'>
@@ -15,18 +19,28 @@ const Heading = () => {
         <h3 className="text-base sm:text-xl md:text-2xl font-medium">
         Notify epitomizes the interconnected workspace, <br />fostering superior, expeditious collaboration.
       </h3>
-      {/* {isLoading && (
+      {isLoading && (
         <div className="w-full flex items-center justify-center">
           <Spinner size="lg" />
         </div>
-      )} */}
-
+      )}
+      {isAuthenticated && !isLoading && (
         <Button asChild>
           <Link href="/documents">
             Enter Notify
             <ArrowRight className="h-4 w-4 ml-2" />
           </Link>
         </Button>
+      )}
+      {!isAuthenticated && !isLoading && (
+        <SignInButton mode="modal">
+          <Button>
+            Join Notify
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Button>
+        </SignInButton>
+      )}
+      
     </div>
   )
 }
