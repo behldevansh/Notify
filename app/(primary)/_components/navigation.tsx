@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils";
 import { useMediaQuery } from "usehooks-ts";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import UserItem from './user-item';
-import { useQuery } from 'convex/react';
+// import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { Item } from './item';
 import { useMutation } from "convex/react";
 import { toast } from "sonner";
+import DocumentList from './document-list';
 
 
 const navigation = () => {
@@ -23,8 +24,8 @@ const navigation = () => {
   const pathname = usePathname();
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
-  const documents=useQuery(api.document.get);
-  const create = useMutation(api.document.create);
+  // const documents=useQuery(api.document.get);
+  const create = useMutation(api.documents.create);
 
 
   useEffect(() => {
@@ -145,19 +146,17 @@ const navigation = () => {
         label='Search'
         icon={Search}
         isSearch
-        onclick={()=>{}}
+        onClick={()=>{}}
         />
         <Item
         label='Settings'
         icon={Settings}
-        onclick={()=>{}}
+        onClick={()=>{}}
         />
-        <Item onclick={handleCreate} label="New page" icon={PlusCircle} />
+        <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
       </div>
       <div className='mt-4'>
-        {documents?.map((document)=>(
-           <p key={document._id}>{document.title}</p>
-        ))}
+        <DocumentList/>
       </div>
       <div
       onMouseDown={handleMouseDown}

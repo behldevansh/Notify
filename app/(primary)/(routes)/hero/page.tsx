@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 const page = () => {
   const {user}=useUser();
-  const create = useMutation(api.document.create);
+  const create = useMutation(api.documents.create);
 
 
 
