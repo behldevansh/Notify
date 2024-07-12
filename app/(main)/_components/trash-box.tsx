@@ -99,14 +99,14 @@ export const TrashBox = () => {
             <div className="flex items-center">
               <button
                 onClick={(e) => onRestore(e, document._id)}
-                className="rounded-sm p-2 hover:bg-neutral-200"
+                className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
                 aria-label="Restore Document"
               >
                 <Undo className="h-4 w-4 text-muted-foreground" />
               </button>
               <ConfirmModal onConfirm={() => onRemove(document._id)}>
                 <button
-                  className="rounded-sm p-2 hover:bg-neutral-200"
+                  className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
                   aria-label="Delete Permanently"
                 >
                   <Trash className="h-4 w-4 text-muted-foreground" />

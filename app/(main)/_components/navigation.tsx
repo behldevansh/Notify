@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
 // import { DocumentList } from "./DocumentList";
-// import { Item } from "./Item";
+import { Item } from "./Item";
 // import { UserItem } from "./UserItem";
 
 import { toast } from "sonner";
@@ -26,13 +26,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-// import { TrashBox } from "./TrashBox";
-import { DocumentList } from "./document-list";
-import { Item } from "./Item";
+import { useSearch } from "@/hooks/use-search";
 import { UserItem } from "./user-item";
+import { DocumentList } from "./document-list";
 import { TrashBox } from "./trash-box";
+import { useSettings } from "@/hooks/useSettings";
 
 const Navigation = () => {
+  const search = useSearch();
+  const settings = useSettings();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
@@ -151,8 +153,8 @@ const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={() => {}} />
-          <Item label="Settings" icon={Settings} onClick={() => {}} />
+          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
           <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
         </div>
         <div className="mt-4">
