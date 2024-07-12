@@ -8,10 +8,11 @@ import { ModeToggle } from '@/components/mode-toggle';
 import { useConvexAuth } from 'convex/react';
 import { SignInButton, UserButton} from '@clerk/clerk-react';
 import { Button } from '@/components/ui/button';
-import {Spinner} from '@/components/spinner';
-import Link from 'next/link';
 
-const navbar = () => {
+import Link from 'next/link';
+import { Spinner } from '@/components/spinner';
+
+const Navbar = () => {
     const {isAuthenticated,isLoading} = useConvexAuth();
     const scrolled = useScrollTop();
   return (
@@ -37,7 +38,7 @@ const navbar = () => {
           {isAuthenticated && !isLoading && (
           <>
             <Button variant="ghost" size="sm" asChild>
-              <Link href="/hero">
+              <Link href="/documents">
                 Enter Notify
               </Link>
             </Button>
@@ -53,4 +54,4 @@ const navbar = () => {
   )
 }
 
-export default navbar
+export default Navbar

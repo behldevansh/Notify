@@ -1,7 +1,7 @@
 export default {
     providers: [
       {
-        domain: "https://emerging-moray-93.clerk.accounts.dev",
+        domain: "https://polished-tomcat-14.clerk.accounts.dev",
         applicationID: "convex",
       },
     ]

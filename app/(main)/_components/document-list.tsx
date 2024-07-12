@@ -1,14 +1,17 @@
 "use client";
 
-import { Doc, Id } from "@/convex/_generated/dataModel";
-import React, { useState } from "react";
-import { useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { Item } from "./item";
+import { useParams, useRouter } from "next/navigation";
+
 import { cn } from "@/lib/utils";
+import { api } from "@/convex/_generated/api";
+import { Doc, Id } from "@/convex/_generated/dataModel";
+
+
 import { FileIcon } from "lucide-react";
+import { Item } from "./Item";
+
 
 interface DocumentListProps {
   parentDocumentId?: Id<"documents">;
@@ -16,7 +19,10 @@ interface DocumentListProps {
   data?: Doc<"documents">[];
 }
 
-const DocumentList = ({ parentDocumentId, level = 0 }: DocumentListProps) => {
+export const DocumentList = ({
+  parentDocumentId,
+  level = 0,
+}: DocumentListProps) => {
   const params = useParams();
   const router = useRouter();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -32,7 +38,6 @@ const DocumentList = ({ parentDocumentId, level = 0 }: DocumentListProps) => {
     parentDocument: parentDocumentId,
   });
 
-  // possible error here
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
@@ -40,11 +45,11 @@ const DocumentList = ({ parentDocumentId, level = 0 }: DocumentListProps) => {
   if (documents === undefined) {
     return (
       <>
-        <Item.skeleton level={level} />
+        <Item.Skeleton level={level} />
         {level === 0 && (
           <>
-            <Item.skeleton level={level} />
-            <Item.skeleton level={level} />
+            <Item.Skeleton level={level} />
+            <Item.Skeleton level={level} />
           </>
         )}
       </>
@@ -54,16 +59,16 @@ const DocumentList = ({ parentDocumentId, level = 0 }: DocumentListProps) => {
   return (
     <>
       <p
-        style={{ paddingLeft: level ? `${(level * 12) + 25}px` : undefined }}
+        style={{ paddingLeft: level ? `${level * 12 + 25}px` : undefined }}
         className={cn(
           "hidden text-sm font-medium text-muted-foreground/80",
           expanded && "last:block",
-          level === 0 && "hidden"
+          level === 0 && "hidden",
         )}
       >
         No pages inside
       </p>
-      {documents.map((document) => (
+      {documents?.map((document) => (
         <div key={document._id}>
           <Item
             id={document._id}
@@ -84,5 +89,3 @@ const DocumentList = ({ parentDocumentId, level = 0 }: DocumentListProps) => {
     </>
   );
 };
-
-export default DocumentList;

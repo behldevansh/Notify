@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-const pics = () => {
+const Heroes = () => {
   return (
     <div className="flex flex-col items-center justify-center max-w-5xl">
       <div className="flex items-center">
@@ -38,4 +38,4 @@ const pics = () => {
   )
 }
 
-export default pics
+export default Heroes
