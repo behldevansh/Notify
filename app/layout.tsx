@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ConvexClientProvider } from "@/components/providers/concex-provider";
 import { Toaster } from "sonner";
 import { ModalProvider } from "@/components/providers/modalProvider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,22 +35,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressContentEditableWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-      <ConvexClientProvider>
-      <ThemeProvider 
-         attribute="class"
-         defaultTheme="system"
-         enableSystem
-         disableTransitionOnChange
-         storageKey="notify-theme"
-        >
-           <Toaster position="bottom-center" />
-           <ModalProvider/>
-        {children}
-        </ThemeProvider>
+        <ConvexClientProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="zotion-theme-2"
+            >
+              <Toaster position="bottom-center" />
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
-        </body>
+      </body>
     </html>
   );
 }
