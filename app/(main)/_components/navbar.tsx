@@ -5,10 +5,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { MenuIcon } from "lucide-react";
 import { useParams } from "next/navigation";
-
-// import { Menu } from "./Menu";
 import { Title } from "./title";
-// import { Banner } from "./Banner";
 import { Menu } from "./menu";
 import { Banner } from "./banner";
 
